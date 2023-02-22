@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container w-50 p-3">
+    <h1 class="display-5">Sign Up</h1>
+
+    <form action="#" th:action="@{/signup}" method="POST">
+
+        <div id="success-msg" th:if="${signupSuccess}"
+             class="alert alert-success">
+            You successfully signed up! Please continue to the <a th:href="@{/login}">login</a> page.
+        </div>
+        <div id="error-msg" th:if="${signupError}" class="alert alert-danger">
+            <span th:text="${signupError}"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="inputFirstName">First Name</label>
+            <input id="inputFirstName" type="input" name="firstName" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="inputLastName">Last Name</label>
+            <input id="inputLastName" type="input" name="lastName" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="inputUsername">Username</label>
+            <input id="inputUsername" type="input" name="username" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="inputPassword">Password</label>
+            <input id="inputPassword" type="password" name="password" class="form-control">
+        </div>
+
+        <button id="submit-button" type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+</div>
+</body>
+</html>
