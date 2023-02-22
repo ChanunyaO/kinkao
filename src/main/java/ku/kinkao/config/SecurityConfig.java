@@ -32,9 +32,16 @@ public class SecurityConfig {
 
                 .and()
                 .formLogin()
+                .loginPage("/login")
                 .defaultSuccessUrl("/restaurant", true)
+                .permitAll()
                 .and()
-                .logout();
+                .logout()
+                .logoutUrl("/logout")
+                .clearAuthentication(true)
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID", "remember-me")
+                .permitAll();
 
 
         return http.build();
