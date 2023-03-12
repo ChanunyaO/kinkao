@@ -11,6 +11,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+
 
 @Configuration
 @EnableWebSecurity
@@ -19,6 +23,12 @@ public class SecurityConfig {
 
     @Autowired
     private UserDetailsServiceImp userDetailsService;
+
+    @Autowired
+    private OidcUserService oidcUserService;
+
+    @Autowired
+    private ApplicationContext context;
 
 
     @Bean
@@ -35,6 +45,11 @@ public class SecurityConfig {
                 .loginPage("/login")
                 .defaultSuccessUrl("/restaurant", true)
                 .permitAll()
+
+                .and()
+                .oauth2Login()
+                .defaultSuccessUrl("/restaurant", true)
+
                 .and()
                 .logout()
                 .logoutUrl("/logout")
@@ -42,6 +57,17 @@ public class SecurityConfig {
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID", "remember-me")
                 .permitAll();
+
+        ClientRegistrationRepository repository =
+                context.getBean(ClientRegistrationRepository.class);
+
+        if (repository != null) {
+            http
+                    .oauth2Login().clientRegistrationRepository(repository)
+                    .userInfoEndpoint().oidcUserService(oidcUserService).and()
+                    .loginPage("/login").permitAll();
+        }
+
 
 
         return http.build();
