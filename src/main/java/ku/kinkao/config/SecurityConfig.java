@@ -78,6 +78,12 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder(12);
     }
 
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .antMatchers("/h2-console/**");
+    }
+
 //    @Override
 //    public void configure(WebSecurity web) throws Exception {
 //        web

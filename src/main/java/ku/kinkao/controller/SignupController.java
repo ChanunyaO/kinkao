@@ -1,5 +1,6 @@
 package ku.kinkao.controller;
 
+import ku.kinkao.dto.SignupDto;
 import ku.kinkao.model.Member;
 import ku.kinkao.service.SignupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class SignupController {
     }
 
     @PostMapping("/signup")
-    public String signupMember(@ModelAttribute Member member, Model model) {
+    public String signupMember(@ModelAttribute SignupDto member, Model model) {
 
         String signupError = null;
 
