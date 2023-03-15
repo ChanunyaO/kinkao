@@ -1,6 +1,9 @@
 package ku.kinkao.dto;
 
 import lombok.Data;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -16,8 +19,14 @@ public class SignupDto {
     private String password;
 
     @NotBlank(message = "First name is required")
+    @Pattern(regexp = "^[a-zA-Z]+$",
+            message = "First name can only contain letters")
     private String firstName;
 
     @NotBlank
     private String lastName;
+
+    @Email
+    @NotBlank
+    private String email;
 }

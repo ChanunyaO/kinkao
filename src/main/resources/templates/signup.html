@@ -29,6 +29,13 @@
             <div class="alert alert-warning" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
         </div>
         <div class="mb-3">
+            <label for="inputEmail">Email</label>
+            <input id="inputEmail" type="text" th:field="*{email}"
+                   class="form-control">
+            <div class="alert alert-warning" th:if="${#fields.hasErrors('email')}"
+                 th:errors="*{email}"></div>
+        </div>
+        <div class="mb-3">
             <label for="inputUsername">Username</label>
             <input id="inputUsername" type="text" th:field="*{username}" class="form-control">
             <div class="alert alert-warning" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
