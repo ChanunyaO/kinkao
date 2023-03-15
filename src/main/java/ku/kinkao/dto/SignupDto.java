@@ -15,7 +15,7 @@ public class SignupDto {
     private String username;
 
     @NotBlank
-    @Size(min=12, max=128, message = "Password must have at least 12 characters")
+    @ku.kinkao.validation.ValidPassword
     private String password;
 
     @NotBlank(message = "First name is required")
