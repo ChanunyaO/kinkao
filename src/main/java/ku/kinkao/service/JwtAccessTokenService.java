@@ -8,6 +8,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import ku.kinkao.dto.JwtResponse;
+
 @Service
 public class JwtAccessTokenService {
 
@@ -46,13 +48,13 @@ public class JwtAccessTokenService {
 
         HttpEntity entity = new HttpEntity(requestBody, headers);
 
-        ResponseEntity<String> response =
+        ResponseEntity<JwtResponse> response =
                 restTemplate.exchange(issuer + "oauth/token",
                         HttpMethod.POST,
-                        entity, String.class);
+                        entity, JwtResponse.class);
 
-        String jwtResponse = response.getBody();
-
-        return jwtResponse;
+        JwtResponse jwtResponse = response.getBody();
+        token = jwtResponse.getAccessToken();
+        return token;
     }
 }
