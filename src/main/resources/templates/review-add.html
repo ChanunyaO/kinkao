@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Kinkao Restaurant Website</title>
+  <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+<div th:insert="fragments/header :: header"></div>
+
+<div class="container">
+  <h1 class="display-6">Add Review</h1>
+
+  <form th:action="@{/review/add}" method="POST">
+
+    <input type="hidden" name="restaurantId" th:value="${restaurantId}" id="restaurantId">
+
+<!--    <div class="mb-3">-->
+<!--      <label for="nameInput" class="form-label">Username</label>-->
+<!--      <input id="nameInput" type="text" class="form-control" name="username">-->
+<!--    </div>-->
+    <div class="mb-3">
+      <label for="reviewTextInput" class="form-label">Review</label>
+      <input id="reviewTextInput" type="text" class="form-control" name="reviewText">
+    </div>
+    <button type="submit" class="btn btn-primary">Add Review</button>
+  </form>
+</div>
+</body>
+</html>

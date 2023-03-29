@@ -11,7 +11,30 @@
 <div th:insert="fragments/header :: header"></div>
 
 <div class="container">
-  <h1 class="display-6">Review</h1>
+
+  <h1 class="display-6" th:text="|${restaurant.name} Reviews|"></h1>
+
+  <br>
+  <p>
+    <a class="btn btn-primary" th:href="@{/review/add/{id}(id=${restaurant.id})}">Add Review</a>
+  </p>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Username</th>
+      <th>Review</th>
+      <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="review : ${reviews}">
+      <td th:text="${review.username}"></td>
+      <td th:text="${review.reviewText}"></td>
+      <td th:text="${review.createdAt}"></td>
+    </tr>
+    </tbody>
+  </table>
 </div>
 
 </body>

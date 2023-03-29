@@ -17,6 +17,7 @@
             <th>Name</th>
             <th>Address</th>
             <th>Rating</th>
+            <th> </th>
         </tr>
         </thead>
         <tbody>
@@ -24,6 +25,10 @@
             <td th:text="${restaurant.name}"></td>
             <td th:text="${restaurant.address}"></td>
             <td th:text="${restaurant.rating}"></td>
+            <td style="text-align: center">
+                <a class="btn btn-primary"
+                   th:href="@{/review/{id}(id=${restaurant.id})}">Review</a>
+            </td>
         </tr>
         </tbody>
     </table>
