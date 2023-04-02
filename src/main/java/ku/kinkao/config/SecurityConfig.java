@@ -10,16 +10,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
-import org.springframework.context.ApplicationContext;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
-
+import org.springframework.context.ApplicationContext;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
 
     @Autowired
     private UserDetailsServiceImp userDetailsService;
@@ -30,10 +27,8 @@ public class SecurityConfig {
     @Autowired
     private ApplicationContext context;
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
         http
                 .authorizeRequests()
                 .antMatchers("/home", "/signup",
@@ -45,11 +40,9 @@ public class SecurityConfig {
                 .loginPage("/login")
                 .defaultSuccessUrl("/restaurant", true)
                 .permitAll()
-
                 .and()
                 .oauth2Login()
                 .defaultSuccessUrl("/restaurant", true)
-
                 .and()
                 .logout()
                 .logoutUrl("/logout")
@@ -58,8 +51,7 @@ public class SecurityConfig {
                 .deleteCookies("JSESSIONID", "remember-me")
                 .permitAll();
 
-        ClientRegistrationRepository repository =
-                context.getBean(ClientRegistrationRepository.class);
+        ClientRegistrationRepository repository = context.getBean(ClientRegistrationRepository.class);
 
         if (repository != null) {
             http
@@ -67,8 +59,6 @@ public class SecurityConfig {
                     .userInfoEndpoint().oidcUserService(oidcUserService).and()
                     .loginPage("/login").permitAll();
         }
-
-
 
         return http.build();
     }

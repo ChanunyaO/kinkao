@@ -1,4 +1,3 @@
-
 package ku.kinkao.controller;
 
 import ku.kinkao.dto.ReviewRequest;
@@ -9,9 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
 import java.util.UUID;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/review")
@@ -23,14 +21,14 @@ public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
-    @GetMapping("/{id}")
-    public String getReviewPage(@PathVariable UUID id,
+    @GetMapping("/{restaurantId}")
+    public String getReviewPage(@PathVariable UUID restaurantId,
                                 Model model) {
 
         model.addAttribute("restaurant",
-                restaurantService.getRestaurantById(id));
+                restaurantService.getRestaurantById(restaurantId));
         model.addAttribute("reviews",
-                reviewService.getRestaurantReview(id));
+                reviewService.getRestaurantReview(restaurantId));
 
         return "review";
     }
@@ -43,12 +41,10 @@ public class ReviewController {
     }
 
     @PostMapping("/add")
-    public String createReview(@ModelAttribute ReviewRequest review,
-                               Model model, Principal principal) {
+    public String createReview(@ModelAttribute ReviewRequest review, Model model, Principal principal) {
         String username = principal.getName();
         review.setUsername(username);
         reviewService.createReview(review);
         return "redirect:/review/" + review.getRestaurantId();
     }
 }
-

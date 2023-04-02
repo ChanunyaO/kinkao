@@ -1,4 +1,3 @@
-
 package ku.kinkao.service;
 
 import ku.kinkao.dto.ReviewRequest;
@@ -57,4 +56,3 @@ public class ReviewService {
         return Arrays.asList(reviews);
     }
 }
-

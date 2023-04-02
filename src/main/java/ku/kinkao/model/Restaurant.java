@@ -1,13 +1,16 @@
 package ku.kinkao.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.Instant;
+
+import org.hibernate.annotations.Type;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.util.UUID;
+import java.time.Instant;
 
 @Data
 @NoArgsConstructor
@@ -16,7 +19,8 @@ public class Restaurant {
 
     @Id
     @GeneratedValue
-    private int id;
+    @Type(type="org.hibernate.type.UUIDCharType")
+    private UUID id;
 
     private String name;
     private String address;

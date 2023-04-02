@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Error</title>
+  <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+
+<body th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
+
+<div th:insert="fragments/header :: header"></div>
+
+<div class="container w-50 p-3">
+  <h1 class="display-5">Error</h1>
+  <p>Something went wrong.</p>
+  <p th:text="|${#response.status} - ${httpStatus.reasonPhrase}|"></p>
+  <p><a th:href="@{/home}">Back to Home Page</a></p>
+</div>
+
+</body>
+</html>

@@ -1,13 +1,16 @@
 package ku.kinkao.controller;
 
-import ku.kinkao.dto.RestaurantRequest;
-import ku.kinkao.service.RestaurantService;
+import ku.kinkao.model.Restaurant;
+import ku.kinkao.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import ku.kinkao.dto.RestaurantRequest;
+import ku.kinkao.service.RestaurantService;
+
 import org.springframework.validation.BindingResult;
 import javax.validation.Valid;
 
@@ -24,7 +27,7 @@ public class RestaurantController {
     }
 
     @GetMapping("/restaurant/add")
-    public String getAddPage(RestaurantRequest restaurantRequest) {
+    public String getAddPage() {
         return "restaurant-add";  // return restaurant-add.html
     }
 
@@ -38,5 +41,4 @@ public class RestaurantController {
         restaurantService.create(restaurant);
         return "redirect:/restaurant";
     }
-
 }
